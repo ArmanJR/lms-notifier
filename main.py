@@ -1,11 +1,23 @@
 from pathlib import Path
 from selenium import webdriver
 import difflib
+import datetime
+import os
 
 # edit here
-lms_username = '952013011'
-lms_password = 'Fuckukhu10times!'
+lms_username = '1234'
+lms_password = '1234'
 # end edit
+
+def write(path, method, content):
+    t = open(path, method, encoding="utf-8")
+    t.write(content)
+    t.close()
+def read(path):
+    t = open(path, "r", encoding="utf-8")
+    content = t.read()
+    t.close()
+    return content
 
 driver = webdriver.Chrome()
 driver.get('https://lms.khu.ac.ir/login/index.php')
@@ -23,6 +35,20 @@ for li in nav:
     except:
         pass
 
+now = str(datetime.datetime.now())
+whatsNew = '''
+<html>
+<head>
+<meta charset="utf-8">
+<style>.new{color:red;}</style>
+</head>
+<body>
+
+<h1>lms notifier</h1>
+<h3>------ ''' + now + ''' ------</h3>
+<p>
+'''
+report = "------ " + now + " ------\n"
 for link in coursesUrl:
     filename, name, url = "sources/" + link[0] + ".txt", link[0], link[1]
     try:
@@ -33,32 +59,33 @@ for link in coursesUrl:
 
         file = Path(filename)
         if not file.is_file():
-            t = open(filename, "w", encoding="utf-8")
-            t.write(source)
-            t.close()
-            print(name + " اضافه شد")
+            write(filename, "w", source)
+            print(name + " added")
             continue
 
-        t = open("sources/temp.txt", "w", encoding="utf-8")
-        t.write(source)
-        t.close()
-
-        f = open(filename, "r", encoding="utf-8")
-        prev = f.read()
-        f.close()
+        write("sources/temp.txt", "w", source)
+        prev = read(filename)
 
         diff = difflib.ndiff(open('sources/temp.txt', encoding="utf-8").readlines(), open(filename, encoding="utf-8").readlines())
         changes = [l for l in diff if l.startswith('+ ')]
-        print("------"+ "تغییرات " + name + "------")
+        report +=  "تغییرات " + name + " =>\n"
+        whatsNew += " تغییرات " + name + " =><br><span class='new'>"
         for c in changes:
-            print(c, end="")
-        print()
+            whatsNew += c + "<br>"
+            report += c + "\n"
+        whatsNew += "</span><br><br>"
+        report += "\n\n"
 
-        t = open(filename, "w", encoding="utf-8")
-        t.write(source)
-        t.close()
+        write("report.txt", "a", report)
+        report = ""
+
+        write(filename, "w", source)
 
     except Exception as e:
         print(e)
 
+whatsNew += "</p><br><i>by junior</i></body></html>"
+write("whats_new.html", "w", whatsNew)
 driver.close()
+print("done")
+os.startfile('whats_new.html')
