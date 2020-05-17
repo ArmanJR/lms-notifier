@@ -9,7 +9,9 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 You must have Python 3, Git and Google Chrome/Chromium on your machine
+
 Windows users: [Python](https://www.python.org/downloads/), [Git](https://git-scm.com/download/win), [Chrome](https://www.google.com/chrome/)
+
 Linux & MacOS:
 
 ```
@@ -34,33 +36,7 @@ First open main.py and edit *lms_username* & *lms_password* with your lms accoun
 ```
 python main.py
 ```
-The first running of this file will create multiple files in the sources folder, further runnings will compare and extract changes from your lms account
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+The first running of this file will create multiple files in the sources folder, further runnings will compare and extract changes from your lms account.
 
 ## Contributing
 
@@ -68,4 +44,4 @@ Pull requests are welcome.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License
