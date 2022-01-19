@@ -69,11 +69,11 @@ for link in coursesUrl:
             continue
 
         write("sources/temp.txt", "w", source)
-        prev = read(filename)
 
-        diff = difflib.ndiff(open('sources/temp.txt', encoding="utf-8").readlines(), open(filename, encoding="utf-8").readlines())
-        changes = [l for l in diff if l.startswith('+ ')]
-        report +=  "تغییرات " + name + " =>\n"
+        diff = difflib.ndiff(open('sources/temp.txt', encoding="utf-8").readlines(),
+                             open(filename, encoding="utf-8").readlines())
+        changes = [l for l in diff if l.startswith("- ")]
+        report += "تغییرات " + name + " =>\n"
         whatsNew += " تغییرات " + name + " =><br><span class='new'>"
         for c in changes:
             whatsNew += c + "<br>"
