@@ -8,9 +8,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-You must have Python 3, Git and Google Chrome/Chromium on your machine
+You must have Python 3, Git and Google Chrome/Chromium along with Chrome Driver on your machine.
 
-Windows users: [Python](https://www.python.org/downloads/), [Git](https://git-scm.com/download/win), [Chrome](https://www.google.com/chrome/)
+Windows users: [Python](https://www.python.org/downloads/), [Git](https://git-scm.com/download/win), [Chrome](https://www.google.com/chrome/), [Chrome Driver](https://chromedriver.chromium.org/downloads)
 
 Linux & MacOS:
 
