@@ -36,7 +36,7 @@ for li in nav:
     try:
         link = li.find_element(By.TAG_NAME, 'a')
         if 'course' in link.get_attribute("href"):
-            coursesUrl.append([link.text, link.get_attribute("href")])
+            coursesUrl.append((link.get_attribute('innerText').strip(), link.get_attribute("href")))
     except:
         pass
 
