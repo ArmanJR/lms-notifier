@@ -1,5 +1,6 @@
 from pathlib import Path
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 import difflib
 import datetime
 import os
@@ -7,12 +8,16 @@ import os
 # edit here
 lms_username = '1234'
 lms_password = '1234'
+
+
 # end edit
 
 def write(path, method, content):
     t = open(path, method, encoding="utf-8")
     t.write(content)
     t.close()
+
+
 def read(path):
     t = open(path, "r", encoding="utf-8")
     content = t.read()
@@ -21,15 +26,15 @@ def read(path):
 
 driver = webdriver.Chrome()
 driver.get('https://lms.khu.ac.ir/login/index.php')
-driver.find_element_by_xpath('//*[@id="username"]').send_keys(lms_username)
-driver.find_element_by_xpath('//*[@id="password"]').send_keys(lms_password)
-driver.find_element_by_xpath('//*[@id="loginbtn"]').click()
+driver.find_element(By.XPATH, '//*[@id="username"]').send_keys(lms_username)
+driver.find_element(By.XPATH, '//*[@id="password"]').send_keys(lms_password)
+driver.find_element(By.XPATH, '//*[@id="loginbtn"]').click()
 
 coursesUrl = []
-nav = driver.find_element_by_xpath('//*[@id="nav-drawer"]').find_elements_by_tag_name('ul li')
+nav = driver.find_element(By.XPATH, '//*[@id="nav-drawer"]').find_elements(By.TAG_NAME, 'ul li')
 for li in nav:
     try:
-        link = li.find_element_by_tag_name('a')
+        link = li.find_element(By.TAG_NAME, 'a')
         if 'course' in link.get_attribute("href"):
             coursesUrl.append([link.text, link.get_attribute("href")])
     except:
@@ -54,7 +59,7 @@ for link in coursesUrl:
     try:
         driver.get(url)
         source = ""
-        for item in driver.find_elements_by_class_name("instancename"):
+        for item in driver.find_elements(By.CLASS_NAME, "instancename"):
             source += item.text + "\n"
 
         file = Path(filename)
